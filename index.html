@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CodePlay — Ultimate Playground</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <!-- lightweight icons (inline fallback available) -->
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">CodePlay <span class="muted">Ultimate</span></div>
+    <div class="toolbar">
+      <div class="left">
+        <select id="templateSelect" title="Choose a starter template">
+          <option value="plain">Template: Plain</option>
+          <option value="react">Template: React (Vite-style)</option>
+          <option value="vue">Template: Vue (CDN)</option>
+        </select>
+
+        <button id="runBtn" title="Run (Ctrl/Cmd+Enter)">▶ Run</button>
+        <label class="small"><input id="autoRun" type="checkbox" /> Auto-run</label>
+
+        <button id="saveBtn" title="Save (Ctrl/Cmd+S)">💾 Save</button>
+        <button id="loadBtn">📂 Load</button>
+      </div>
+
+      <div class="right">
+        <button id="importBtn">📥 Import</button>
+        <input id="importFile" type="file" accept=".html,.htm,.css,.js,.txt" style="display:none" />
+        <button id="importZipBtn">📥 Import ZIP</button>
+        <input id="importZip" type="file" accept=".zip" style="display:none" />
+
+        <button id="exportZipBtn">📦 Export ZIP</button>
+        <button id="downloadSingleBtn">🧩 Download Portable HTML</button>
+
+        <select id="editorEngine">
+          <option value="cm6">Editor: CodeMirror 6</option>
+          <option value="monaco">Editor: Monaco (load on demand)</option>
+        </select>
+
+        <label class="small"><input id="themeToggle" type="checkbox" /> Light</label>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="leftPanel">
+      <div class="tabs">
+        <button class="tab active" data-lang="html">HTML</button>
+        <button class="tab" data-lang="css">CSS</button>
+        <button class="tab" data-lang="js">JS</button>
+      </div>
+
+      <div id="editorContainer" class="editorContainer">
+        <!-- Editor mountpoint(s) -->
+        <div id="cm6Editor" class="editorMount"></div>
+        <div id="monacoEditor" class="editorMount hidden"></div>
+      </div>
+
+      <div class="bottomControls">
+        <label>Zoom:
+          <select id="zoom">
+            <option value="1">100%</option>
+            <option value="0.9">90%</option>
+            <option value="0.8">80%</option>
+          </select>
+        </label>
+
+        <label class="small">
+          <input id="rememberToken" type="checkbox" /> Remember gist token
+        </label>
+      </div>
+    </aside>
+
+    <section class="rightPanel">
+      <div class="previewTop">
+        <input id="gistToken" type="password" placeholder="GitHub token (optional)" class="token" />
+        <label class="small"><input id="privateGist" type="checkbox" /> Private gist</label>
+        <button id="uploadGistBtn">🔗 Upload Gist</button>
+        <button id="copyGistBtn" disabled>📋 Copy Gist URL</button>
+      </div>
+
+      <div class="previewWrap">
+        <iframe id="preview" sandbox="allow-scripts allow-forms"></iframe>
+      </div>
+
+      <div class="statusBar">
+        <div id="status">Ready</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>CodePlay — Built with CodeMirror 6 & Monaco. Use GitHub token for private Gists (scope: <code>gist</code>).</small>
+  </footer>
+
+  <!-- App (module) -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
